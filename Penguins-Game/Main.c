@@ -1,5 +1,5 @@
 #include <stdio.h>
-//#include "IOFileManager.h" //Header with reading and writing IO file functions
+#include "IOFileManager.h" //Header with reading and writing IO file functions
 
 //Data from input file
 int currentPlayer;
