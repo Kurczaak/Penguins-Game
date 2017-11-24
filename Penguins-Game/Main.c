@@ -51,7 +51,7 @@ int main()
 	}
 
 	IncreaseCurrentPlayerIndex(); //Increase current player index (Read David's concept)
-								  //CREATE OUTPUT FILE() (function in IOFileManager.h)
+	//CREATE OUTPUT FILE() (function in IOFileManager.h)
 	return 0;
 
 }
