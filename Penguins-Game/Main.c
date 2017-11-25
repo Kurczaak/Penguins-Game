@@ -3,7 +3,7 @@
 
 //Data from input file
 int currentPlayer;
-int playerScores[];
+int playersScores[10];  //1,2,3,... not 0,1,2,3,...
 int numberOfPlayers;
 int numberOfPenguinPerPlayer;
 char gamePhase[25];
@@ -11,25 +11,26 @@ char gamePhase[25];
 int numberOfMapRows;
 char mapRows[10][10];
 
+
 //Functions 
 void IncreaseCurrentPlayerIndex();
 
 int main()
 {
-	//READ VALUES FROM OUTPUTFILE() (function in IOFileManager.h)
-	//PRINT THE MAP(mapRows) (optional)
+	ReadDataFromInputFile(); //Read data from InputFile (function in IOFileManager.h)
+	//PRINT THE MAP(mapRows); (optional)
 
 	if (gamePhase == "placement")
 	{
 		int p;
 		for (p = 0; p < numberOfPenguinPerPlayer; p++)
 		{
-			//PLACE PENGUIN(p)
+			//PLACE PENGUIN(p);
 		}
 
 		if (currentPlayer == numberOfPlayers)
 		{
-			//CHANGE GAMEPHASE TO MOVEMENT()
+			//CHANGE GAMEPHASE TO MOVEMENT();
 		}
 	}
 	else if (gamePhase == "movement")
@@ -37,11 +38,11 @@ int main()
 		int p;
 		for (p = 0; p < numberOfPenguinPerPlayer; p++)
 		{
-			int ways; //= FIND POSSIBLE WAYS OF MOVEMENT FOR PENGUIN()
+			int ways; //= FIND POSSIBLE WAYS OF MOVEMENT FOR PENGUIN();
 			if (ways > 0)
 			{
-				//FIND THE BEST WAY FOR PENGUIN(p)
-				//MOVE PENGUIN(p) (1. Collect fish from the current tile(change playerScores[] 2. Place penguin on next tile(change mapRows[][] data))
+				//FIND THE BEST WAY FOR PENGUIN(p);
+				//MOVE PENGUIN(p); (1. Collect fish from the current tile(change playerScores[] 2. Place penguin on next tile(change mapRows[][] data))
 			}
 			else
 			{
@@ -50,8 +51,17 @@ int main()
 		}
 	}
 
+	/*	
+	!!!I/O File need to be extended to store what players doesn't have movement possibility!!!
+
+	if(If none of the penguins of all players have possibility to move)
+	{ 
+		PRINT ALL SCORES AND PICK THE WINNER();
+	}
+	*/
+
 	IncreaseCurrentPlayerIndex(); //Increase current player index (Read David's concept)
-	//CREATE OUTPUT FILE() (function in IOFileManager.h)
+	//CREATE OUTPUT FILE(); (function in IOFileManager.h)
 	return 0;
 
 }

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 extern int currentPlayer;
-extern int playerScores[];
+extern int playersScores[10]; //1,2,3,... not 0,1,2,3,...
 extern int numberOfPlayers;
 extern int numberOfPenguinPerPlayer;
 extern char gamePhase[25];
@@ -9,18 +9,16 @@ extern int numberOfMapRows;
 
 extern char mapRows[10][10];
 
-void ReadFromInputFile();
-void WriteToOutputFile();
+char scoresRow[25];
+
+void Debug();
+void ReadDataFromInputFile();
+void WriteDataToOutputFile();
+void ReadPlayersScores();
 void StrCopy(char*, char*);
 
-void PrintRead()
+void Debug()
 {
-	printf("%d\n\n", 001);
-
-
-	ReadFromInputFile();
-	WriteToOutputFile();
-
 	/*
 	printf("%d\n", currentPlayer);
 
@@ -39,7 +37,7 @@ void PrintRead()
 	*/
 }
 
-void ReadFromInputFile()
+void ReadDataFromInputFile() //Loop through all lines of the InputFile and assign data to the variables
 {
 	int line = 0;
 	numberOfMapRows = 0;
@@ -48,42 +46,42 @@ void ReadFromInputFile()
 	else { printf("Success opening file\n"); } //Check if the file has been opened
 	char tempData[25]; //String where lines of text in the file will be stored temporary
 
-	while (!feof(inputFile)) //Loop through all lines of the text in the file
+	while (!feof(inputFile)) 
 	{
 		fgets(tempData, 25, inputFile);
-		//fscanf(inputFile, "%s\n", tempData); //Read the line and store it in the data string
-
-		if (line == 0) {
-			currentPlayer = tempData[0] - '0';
-
-			fscanf(inputFile, "%s\n", tempData);
-			printf("%s", tempData);
-
-			//playerScores[]
-			//StrCopy(tempData, mapRows[numberOfMapRows]);
-			//fscanf for i > 5
-		}
-		if (line == 1) { numberOfPlayers = tempData[0] - '0'; }
+		if (line == 0) { currentPlayer = tempData[0] - '0'; StrCopy(tempData, scoresRow);}
+		if (line == 1) { numberOfPlayers = tempData[0] - '0'; ReadPlayersScores(); }
 		if (line == 2) { numberOfPenguinPerPlayer = tempData[0] - '0'; }
 		if (line == 3) { StrCopy(tempData, gamePhase); }
 		if (line > 3) { StrCopy(tempData, mapRows[numberOfMapRows]); numberOfMapRows++; }
 		line++;
 	}
 	fclose(inputFile);
-
 }
 
-void WriteToOutputFile()
+
+void WriteDataToOutputFile()
 {
+	/*
 	FILE* outputFile = fopen("data.bin", "w"); //Open the file for reading
 	if (outputFile == NULL) { printf("Error opening file\n"); }
 	else { printf("Success opening file\n"); } //Check if the file has been opened
 	fputs(currentPlayer, outputFile);
-
-
 	fclose(outputFile);
+	*/
 }
 
+void ReadPlayersScores() //Read players scores from IOFile to playersScoresArray (
+{
+	int i;
+	for (i = 1; i < numberOfPlayers + 1; i++) 
+	{
+		int a, b = 0;
+		a = scoresRow[i * 3 - 1] - '0';
+		b = scoresRow[i * 3] - '0';
+		playersScores[i] = a * 10 + b;
+	}
+}
 
 void StrCopy(char* str_1, char* str_2)
 {
