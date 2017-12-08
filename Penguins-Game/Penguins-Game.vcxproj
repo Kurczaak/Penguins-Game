@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IOFileManager.c" />
     <ClCompile Include="Main.c" />
   </ItemGroup>
   <ItemGroup>

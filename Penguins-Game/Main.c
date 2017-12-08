@@ -6,31 +6,32 @@ int currentPlayer;
 int playersScores[10];  //1,2,3,... not 0,1,2,3,...
 int numberOfPlayers;
 int numberOfPenguinPerPlayer;
+int numberOfPlacedPenguins;
 char gamePhase[25];
 
 int numberOfMapRows;
-char mapRows[10][10];
+char map[20][20];
 
 
-//Functions 
+//Functions declaration
 void IncreaseCurrentPlayerIndex();
+void StrCopy(char*, char*);
 
 int main()
 {
-	ReadDataFromInputFile(); //Read data from InputFile (function in IOFileManager.h)
-	//PRINT THE MAP(mapRows); (optional)
+	ReadDataFromInputFile(); //Read data from InputFile (function in IOFileManager.c)
+	
+    int i; for (i = 0; i < numberOfMapRows; i++) { printf("%s", map[i]); } //PRINT THE MAP(map); Extend this 
 
 	if (gamePhase == "placement")
-	{
-		int p;
-		for (p = 0; p < numberOfPenguinPerPlayer; p++)
-		{
-			//PLACE PENGUIN(p);
-		}
+	{		
 
-		if (currentPlayer == numberOfPlayers)
+		//PLACE PENGUIN(p);
+		
+
+		if (numberOfPlacedPenguins >= numberOfPlayers * numberOfPenguinPerPlayer) //Change game phase
 		{
-			//CHANGE GAMEPHASE TO MOVEMENT();
+			StrCopy("movement\n", gamePhase);
 		}
 	}
 	else if (gamePhase == "movement")
@@ -61,7 +62,7 @@ int main()
 	*/
 
 	IncreaseCurrentPlayerIndex(); //Increase current player index (Read David's concept)
-	//CREATE OUTPUT FILE(); (function in IOFileManager.h)
+	//CREATE OUTPUT FILE(); (function in IOFileManager.c)
 	return 0;
 
 }
@@ -86,3 +87,11 @@ void IncreaseCurrentPlayerIndex()
 	}
 }
 
+void StrCopy(char* str_1, char* str_2)
+{
+	while (*str_1 != '\0')
+	{
+		*str_2 = *str_1++;
+		++str_2;
+	}
+}
